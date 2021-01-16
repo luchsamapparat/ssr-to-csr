@@ -5,7 +5,8 @@ import { customizeValidationErrorMessage, submitForm } from './utils.js';
 
 export const AddTaskFormView = Backbone.View.extend({
     events: {
-        'submit': 'onSubmit'
+        'submit': 'onSubmit',
+        'change': 'onAddTaskFormChange'
     },
 
     initialize() {
@@ -30,7 +31,16 @@ export const AddTaskFormView = Backbone.View.extend({
         await this.addTask(form);
         form.reset();
     },
-    
+
+    /**
+     * @param {Event} event 
+     */
+    onAddTaskFormChange(event) {
+        const form = /** @type {HTMLFormElement} */ (event.currentTarget);
+
+        form.classList.add('was-validated');
+    },
+
     /**
      * @param {HTMLFormElement} form 
      */
