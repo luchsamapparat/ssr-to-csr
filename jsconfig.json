@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "module": "es2020",
+        "target": "es6",
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "es2019"
+        ]
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
