@@ -15,9 +15,9 @@
 </head>
 
 <body class="container py-5">
-    <p th:if="${tasks.empty}" class="alert alert-success mb-5" role="alert">All done!</p>
+    <p th:if="${tasks.empty}" class="empty-task-list alert alert-success mb-5" role="alert">All done!</p>
 
-    <form th:if="${!tasks.empty}" th:action="@{/tasks/completed}" method="post" class="completed-tasks mb-5">
+    <form th:if="${!tasks.empty}" th:action="@{/tasks/completed}" method="post" class="task-list mb-5">
         <ul class="list-unstyled">
             <li th:each="task : ${tasks}" class="form-check">
                 <input type="checkbox" name="completedTasks" th:id="${'completedTasks-' + task.id}" th:value="${task.id}" class="form-check-input completed-task" />
@@ -28,7 +28,7 @@
             </li>
         </ul>
 
-        <button class="btn btn-primary mark-as-completed">Mark as Completed</button>
+        <button class="mark-as-completed btn btn-primary">Mark as Completed</button>
     </form>
 
     <form th:action="@{/tasks}" th:object="${taskForm}" method="post" class="add-task row needs-validation was-validated">
@@ -45,7 +45,7 @@
         </div>
 
         <div class="col-xl-1 col-lg-1 col-md-2 col-sm-2 mb-3 d-flex flex-wrap align-content-end">
-            <button class="btn btn-primary flex-fill">
+            <button class="add-task btn btn-primary flex-fill">
                 Add
                 <span class="d-sm-none">Task</span>
             </button>
