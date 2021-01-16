@@ -9,7 +9,7 @@ export const TasksView = Backbone.View.extend({
 
     initialize() {
         this.addTaskFormView = new AddTaskFormView({
-            el: '.add-task'
+            el: '.add-task-form'
         });
         this.listenTo(this.addTaskFormView, 'taskListUpdate', this.updateTaskList.bind(this))
         this.addTaskFormView.render();
