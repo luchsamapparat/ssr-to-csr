@@ -10,7 +10,7 @@ export const AddTaskFormView = Backbone.View.extend({
     },
 
     initialize() {
-        this.el.classList.remove('was-validated');
+        this.resetForm();
 
         customizeValidationErrorMessage(
             this.el.querySelector('.description'),
@@ -22,6 +22,11 @@ export const AddTaskFormView = Backbone.View.extend({
         );
     },
 
+    resetForm() {
+        this.el.classList.remove('was-validated');
+        this.el.reset();
+    },
+
     /**
      * @param {Event} event 
      */
@@ -29,7 +34,7 @@ export const AddTaskFormView = Backbone.View.extend({
         event.preventDefault();
         const form = /** @type {HTMLFormElement} */ (event.currentTarget);
         await this.addTask(form);
-        form.reset();
+        this.resetForm();
     },
 
     /**
