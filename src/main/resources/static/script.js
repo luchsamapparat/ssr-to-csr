@@ -1,6 +1,6 @@
 // @ts-check
 
-document.querySelectorAll('.completed-tasks')
+document.querySelectorAll('.task-list')
     .forEach(form => {
         form.querySelectorAll('.completed-task')
             .forEach(checkbox => checkbox.addEventListener('change', onCompletedTaskCheckboxChange));
@@ -9,7 +9,7 @@ document.querySelectorAll('.completed-tasks')
             .remove();
     });
 
-document.querySelectorAll('.add-task')
+document.querySelectorAll('.add-task-form')
     .forEach(form => {
         form.classList.remove('was-validated');
         form.addEventListener('change', onAddTaskFormChange);
