@@ -48,7 +48,7 @@ export const AddTaskFormView = Backbone.View.extend({
             this.resetForm();
         } catch (errorDocument) {
             if (errorDocument instanceof HTMLDocument) {
-                this.handleValidationError(errorDocument);
+                this.handleValidationErrors(errorDocument);
             }
         }
     },
@@ -66,12 +66,13 @@ export const AddTaskFormView = Backbone.View.extend({
     /**
      * @param {HTMLDocument} errorDocument 
      */
-    handleValidationError(errorDocument) {
+    handleValidationErrors(errorDocument) {
         this.clearValidationErrors();
         errorDocument.querySelectorAll('.invalid-feedback').forEach(
             errorMessageElement => {
                 const formControlId = errorMessageElement.previousElementSibling.id;
-                const formControl = /** @type {HTMLElement} */ (this.form.querySelector(`#${formControlId}`));
+                /** @type {HTMLElement} */
+                const formControl = this.form.querySelector(`#${formControlId}`);
                 formControl.classList.add('is-invalid');
                 formControl.parentElement.insertBefore(
                     errorMessageElement,
