@@ -1,5 +1,6 @@
 package org.luchs.marvin.ssrtodo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,8 @@ import java.util.List;
 @Controller
 public class TodoController {
 
-    TodoList todoList = new TodoList();
+    @Autowired
+    private TodoListService todoListService;
 
     @GetMapping("/")
     public ModelAndView get(TaskForm taskForm) {
@@ -85,17 +87,17 @@ public class TodoController {
 
     private ModelAndView renderTodoList(ModelAndView model) {
         model.setViewName("todoList");
-        model.addObject("tasks", todoList.getTasks());
+        model.addObject("tasks", todoListService.getTasks());
         return model;
     }
 
     private void addTask(TaskForm taskForm) {
-        todoList.addTask(new Task(taskForm.getDescription(), taskForm.getDueDate()));
+        todoListService.addTask(taskForm.getDescription(), taskForm.getDueDate());
     }
 
     private void completeTasks(List<String> taskIds) {
         if (taskIds != null) {
-            taskIds.forEach(taskId -> todoList.completeTask(taskId));
+            taskIds.forEach(taskId -> todoListService.completeTask(taskId));
         }
     }
 
