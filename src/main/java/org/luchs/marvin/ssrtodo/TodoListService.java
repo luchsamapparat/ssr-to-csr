@@ -18,8 +18,11 @@ public class TodoListService {
         todoList.addTask(new Task(description, dueDate));
     }
 
-    void completeTask(String taskId) {
-        todoList.completeTask(taskId);
+    void completeTasks(List<String> taskIds) {
+        if (taskIds == null) {
+            return;
+        }
+        taskIds.forEach(taskId -> todoList.completeTask(taskId));
     }
 
 }
