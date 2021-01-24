@@ -1,6 +1,8 @@
+// @ts-check
+
 import { AddTaskFormView } from './add-task-form-view.js';
 import { Backbone } from './backbone.js';
-import { submitForm } from './utils.js';
+import { submitForm } from './http.js';
 
 export const TasksView = Backbone.View.extend({
     events: {

@@ -36,12 +36,3 @@ async function submitUsingFetch(form) {
         body: new URLSearchParams(new FormData(form).entries()).toString()
     });
 }
-
-/**
- * @param {HTMLInputElement} input 
- * @param {string} errorMessage 
- */
-export function customizeValidationErrorMessage(input, errorMessage) {
-    input.addEventListener('input', () => input.setCustomValidity(''));
-    input.addEventListener('invalid', () => input.setCustomValidity(errorMessage));
-}

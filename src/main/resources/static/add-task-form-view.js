@@ -1,7 +1,8 @@
 // @ts-check
 
 import { Backbone } from './backbone.js';
-import { customizeValidationErrorMessage, submitForm } from './utils.js';
+import { submitForm } from './http.js';
+import { customizeValidationErrorMessage } from './validation.js';
 
 export const AddTaskFormView = Backbone.View.extend({
     events: {
