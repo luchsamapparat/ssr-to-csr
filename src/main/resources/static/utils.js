@@ -2,7 +2,7 @@
 
 /**
  * @param {HTMLFormElement} form
- * @returns {Promise<HTMLDocument>}
+ * @returns {Promise<object>}
  */
 export async function submitForm(form) {
     let response;
@@ -13,13 +13,13 @@ export async function submitForm(form) {
         return;
     }
 
-    const responseDocument = new DOMParser().parseFromString(await response.text(), 'text/html');
+    const responseBody = await response.json();
 
     if (!response.ok) {
-        throw responseDocument;
+        throw responseBody;
     }
 
-    return responseDocument;
+    return responseBody;
 }
 
 /**
@@ -27,14 +27,57 @@ export async function submitForm(form) {
  * @returns {Promise<Response>}
  */
 async function submitUsingFetch(form) {
-    return fetch(form.action, {
+    const response = await fetch(form.action, {
         method: form.method,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
         },
-        // @ts-ignore https://github.com/microsoft/TypeScript/issues/30584
-        body: new URLSearchParams(new FormData(form).entries()).toString()
+        body: JSON.stringify(toJson(new FormData(form)))
     });
+
+    if (is201ResponseWithRedirect(response)) {
+        return followRedirect(response);
+    }
+
+    return response;
+}
+
+/**
+ * @param {Response} response 
+ */
+const is201ResponseWithRedirect = response => response.status === 201 && response.headers.get('Location') !== null;
+
+async function followRedirect(response) {
+    return fetch(response.headers.get('Location'), {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    });
+}
+
+/**
+ * @param {FormData} formData 
+ * @returns {object}
+ */
+function toJson(formData) {
+    return Array.from(formData.entries())
+        .reduce(
+            (obj, [key, value]) => {
+                if (key.endsWith('[]')) {
+                    key = key.replace(/\[\]$/, '')
+                    if (obj[key] === undefined) {
+                        obj[key] = [];
+                    }
+                    obj[key].push(value);
+                } else {
+                    obj[key] = value;
+                }
+                return obj;
+            },
+            {}
+        )
 }
 
 /**

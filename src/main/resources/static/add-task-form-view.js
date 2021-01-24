@@ -1,6 +1,7 @@
 // @ts-check
 
 import { Backbone } from './backbone.js';
+import { getTemplate } from './template.js';
 import { customizeValidationErrorMessage, submitForm } from './utils.js';
 
 export const AddTaskFormView = Backbone.View.extend({
@@ -43,12 +44,12 @@ export const AddTaskFormView = Backbone.View.extend({
 
     async addTask() {
         try {
-            const updatedDocument = await submitForm(this.form);
-            this.trigger('taskListUpdate', updatedDocument);
+            const updatedTaskList = await submitForm(this.form);
+            this.trigger('taskListUpdate', updatedTaskList);
             this.resetForm();
-        } catch (errorDocument) {
-            if (errorDocument instanceof HTMLDocument) {
-                this.handleValidationError(errorDocument);
+        } catch (error) {
+            if (error.status === 422) {
+                this.handleValidationError(error.violations);
             }
         }
     },
@@ -64,15 +65,18 @@ export const AddTaskFormView = Backbone.View.extend({
     },
 
     /**
-     * @param {HTMLDocument} errorDocument 
+     * @param {Violation[]} violations 
      */
-    handleValidationError(errorDocument) {
+    handleValidationError(violations) {
         this.clearValidationErrors();
-        errorDocument.querySelectorAll('.invalid-feedback').forEach(
-            errorMessageElement => {
-                const formControlId = errorMessageElement.previousElementSibling.id;
-                const formControl = /** @type {HTMLElement} */ (this.form.querySelector(`#${formControlId}`));
+        violations.forEach(
+            ({ field, message }) => {
+                const formControl = /** @type {HTMLElement} */ (this.form.querySelector(`#addTask-${field}`));
                 formControl.classList.add('is-invalid');
+
+                const errorMessageElement = getTemplate('error-message');
+                errorMessageElement.querySelector('div').innerText = message;
+
                 formControl.parentElement.insertBefore(
                     errorMessageElement,
                     formControl.nextSibling
@@ -81,3 +85,19 @@ export const AddTaskFormView = Backbone.View.extend({
         )
     }
 });
+
+/**
+ * @typedef Problem
+ * @type {object}
+ * @property {string} type
+ * @property {number} status
+ * @property {string} title
+ * @property {Violation[]} violations
+ */
+
+/**
+ * @typedef Violation
+ * @type {object}
+ * @property {string} field
+ * @property {string} message
+ */

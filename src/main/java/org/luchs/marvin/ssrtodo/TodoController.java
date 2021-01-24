@@ -67,8 +67,8 @@ public class TodoController {
     }
 
     @PostMapping(value = "/tasks/completed", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity completeTasksJson(@RequestParam("completedTasks[]") List<String> taskIds) {
-        completeTasks(taskIds);
+    public ResponseEntity completeTasksJson(@RequestBody CompletedTasksForm completedTasksForm) {
+        completeTasks(completedTasksForm.getCompletedTasks());
         return ResponseEntity
             .status(HttpStatus.SEE_OTHER)
             .location(URI.create("/tasks"))

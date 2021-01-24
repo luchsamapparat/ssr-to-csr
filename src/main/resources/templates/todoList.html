@@ -62,6 +62,31 @@
             </button>
         </div>
     </form>
+
+    <template id="empty-task-list-template">
+        <p class="empty-task-list alert alert-success mb-5" role="alert">All done!</p>
+    </template>
+
+    <template id="task-list-template">
+        <form th:action="@{/tasks/completed}" method="post" class="task-list mb-5">
+            <ul class="list-unstyled">
+            </ul>
+        </form>
+    </template>
+
+    <template id="task-template">
+        <li class="form-check">
+            <input type="checkbox" name="completedTasks[]" class="form-check-input completed-task" />
+            <label class="form-check-label">
+                <span></span>
+                <span class="text-secondary pl-2"></span>
+            </label>
+        </li>
+    </template>
+
+    <template id="error-message-template">
+        <div class="invalid-feedback"></div>
+    </template>
 </body>
 
 </html>
