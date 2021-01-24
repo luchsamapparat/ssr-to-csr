@@ -22,6 +22,10 @@ export async function submitForm(form) {
     return responseDocument;
 }
 
+/**
+ * @param {HTMLFormElement} form
+ * @returns {Promise<Response>}
+ */
 async function submitUsingFetch(form) {
     return fetch(form.action, {
         method: form.method,
