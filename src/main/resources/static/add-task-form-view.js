@@ -48,7 +48,7 @@ export const AddTaskFormView = Backbone.View.extend({
             this.resetForm();
         } catch (errorDocument) {
             if (errorDocument instanceof HTMLDocument) {
-                this.handleValidationError(errorDocument)
+                this.handleValidationError(errorDocument);
             }
         }
     },
