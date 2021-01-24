@@ -2,7 +2,8 @@
 
 import { AddTaskFormView } from './add-task-form-view.js';
 import { Backbone } from './backbone.js';
-import { submitForm } from './utils.js';
+import { submitForm } from './http.js';
+import { getTemplate } from './template.js';
 
 export const TasksView = Backbone.View.extend({
     events: {
@@ -55,6 +56,7 @@ export const TasksView = Backbone.View.extend({
         const taskListItemElement = getTemplate('task');
         const checkboxId = `completedTasks-${task.id}`;
         
+        /** @type HTMLInputElement */
         const checkbox = taskListItemElement.querySelector('input[type="checkbox"]');
         checkbox.id = checkboxId;
         checkbox.value = task.id;
@@ -62,9 +64,11 @@ export const TasksView = Backbone.View.extend({
         const label = taskListItemElement.querySelector('label');
         label.htmlFor = checkboxId;
 
+        /** @type HTMLSpanElement */
         const description = label.querySelector('span:first-child');
         description.innerText = task.description;
 
+        /** @type HTMLSpanElement */
         const dueDate = label.querySelector('span:last-child');
         if (task.dueDate === null) {
             dueDate.remove();

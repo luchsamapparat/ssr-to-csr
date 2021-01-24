@@ -1,8 +1,9 @@
 // @ts-check
 
 import { Backbone } from './backbone.js';
+import { submitForm } from './http.js';
 import { getTemplate } from './template.js';
-import { customizeValidationErrorMessage, submitForm } from './utils.js';
+import { customizeValidationErrorMessage } from './validation.js';
 
 export const AddTaskFormView = Backbone.View.extend({
     events: {
@@ -49,7 +50,7 @@ export const AddTaskFormView = Backbone.View.extend({
             this.resetForm();
         } catch (error) {
             if (error.status === 422) {
-                this.handleValidationError(error.violations);
+                this.handleValidationErrors(error.violations);
             }
         }
     },
@@ -65,13 +66,14 @@ export const AddTaskFormView = Backbone.View.extend({
     },
 
     /**
-     * @param {Violation[]} violations 
+     * @param {import('./validation.js').Violation[]} violations 
      */
-    handleValidationError(violations) {
+    handleValidationErrors(violations) {
         this.clearValidationErrors();
         violations.forEach(
             ({ field, message }) => {
-                const formControl = /** @type {HTMLElement} */ (this.form.querySelector(`#addTask-${field}`));
+                /** @type {HTMLElement} */
+                const formControl = this.form.querySelector(`#addTask-${field}`);
                 formControl.classList.add('is-invalid');
 
                 const errorMessageElement = getTemplate('error-message');
@@ -85,19 +87,3 @@ export const AddTaskFormView = Backbone.View.extend({
         )
     }
 });
-
-/**
- * @typedef Problem
- * @type {object}
- * @property {string} type
- * @property {number} status
- * @property {string} title
- * @property {Violation[]} violations
- */
-
-/**
- * @typedef Violation
- * @type {object}
- * @property {string} field
- * @property {string} message
- */
