@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -27,7 +28,7 @@ public class TodoController {
     }
 
     @PostMapping(value = "/tasks", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ModelAndView addTask(@Valid TaskForm taskForm, BindingResult bindingResult) {
+    public ModelAndView processTaskForm(@Valid TaskForm taskForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             ModelAndView model = new ModelAndView();
             model.setStatus(HttpStatus.UNPROCESSABLE_ENTITY);
@@ -44,8 +45,7 @@ public class TodoController {
     }
 
     @PostMapping(value = "/tasks/completed", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ModelAndView completeTasks(TodoListUpdate todoListUpdate) {
-        List<String> taskIds = todoListUpdate.getCompletedTasks();
+    public ModelAndView processCompleteTasksForm(@RequestParam("completedTasks[]") List<String> taskIds) {
         completeTasks(taskIds);
         return redirectToTasks();
     }
