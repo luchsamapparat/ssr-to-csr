@@ -34,7 +34,7 @@ public class TodoController {
             return renderTodoList(model);
         }
 
-        todoList.addTask(new Task(taskForm.getDescription(), taskForm.getDueDate()));
+        addTask(taskForm);
         return redirectToTasks();
     }
 
@@ -46,11 +46,7 @@ public class TodoController {
     @PostMapping(value = "/tasks/completed", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public ModelAndView completeTasks(TodoListUpdate todoListUpdate) {
         List<String> taskIds = todoListUpdate.getCompletedTasks();
-
-        if (taskIds != null) {
-            taskIds.forEach(taskId -> todoList.completeTask(taskId));
-        }
-
+        completeTasks(taskIds);
         return redirectToTasks();
     }
 
@@ -68,5 +64,14 @@ public class TodoController {
         return model;
     }
 
+    private void addTask(TaskForm taskForm) {
+        todoList.addTask(new Task(taskForm.getDescription(), taskForm.getDueDate()));
+    }
+
+    private void completeTasks(List<String> taskIds) {
+        if (taskIds != null) {
+            taskIds.forEach(taskId -> todoList.completeTask(taskId));
+        }
+    }
 
 }
