@@ -19,7 +19,7 @@
     <form th:if="${!tasks.empty}" th:action="@{/tasks/completed}" method="post" class="task-list mb-5">
         <ul class="list-unstyled">
             <li th:each="task : ${tasks}" class="form-check">
-                <input type="checkbox" name="completedTasks" th:id="${'completedTasks-' + task.id}" th:value="${task.id}" class="form-check-input completed-task" />
+                <input type="checkbox" name="completedTasks[]" th:id="${'completedTasks-' + task.id}" th:value="${task.id}" class="form-check-input completed-task" />
                 <label th:for="${'completedTasks-' + task.id}" class="form-check-label">
                     <span th:text="${task.description}"></span>
                     <span th:if="${task.dueDate}" th:text="${#temporals.format(task.dueDate, 'dd.MM.yyyy')}" class="text-secondary pl-2"></span>
