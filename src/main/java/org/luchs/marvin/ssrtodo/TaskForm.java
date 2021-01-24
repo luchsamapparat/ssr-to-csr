@@ -30,11 +30,4 @@ public class TaskForm {
         return dueDate;
     }
 
-    @Override
-    public String toString() {
-        return "TaskForm{" +
-            "description='" + description + '\'' +
-            ", dueDate=" + dueDate +
-        '}';
-    }
 }
