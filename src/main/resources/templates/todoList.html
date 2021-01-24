@@ -44,8 +44,8 @@
             <div th:if="${#fields.hasErrors('dueDate')}" th:errors="*{dueDate}" class="invalid-feedback"></div>
         </div>
 
-        <div class="col-xl-1 col-lg-1 col-md-2 col-sm-2 mb-3 d-flex flex-wrap align-content-end">
-            <button class="add-task btn btn-primary flex-fill">
+        <div class="col-xl-1 col-lg-1 col-md-2 col-sm-2 mb-3 d-flex flex-wrap align-content-start">
+            <button class="add-task btn btn-primary flex-fill" style="margin-top: 32px">
                 Add
                 <span class="d-sm-none">Task</span>
             </button>
