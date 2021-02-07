@@ -8,6 +8,7 @@ public class Task {
     private final String id;
     private final String description;
     private final LocalDate dueDate;
+    private boolean completed = false;
 
     public Task(String description, LocalDate dueDate) {
         this.id = UUID.randomUUID().toString();
@@ -25,5 +26,13 @@ public class Task {
 
     public LocalDate getDueDate() {
         return dueDate;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void markAsCompleted() {
+        this.completed = true;
     }
 }

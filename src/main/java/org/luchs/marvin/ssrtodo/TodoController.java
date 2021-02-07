@@ -42,8 +42,11 @@ public class TodoController {
     }
 
     @GetMapping("/tasks/completed")
-    public ModelAndView getCompletedTasks() {
-        return redirectToTasks();
+    public ModelAndView getCompletedTasks(ModelAndView model) {
+        model.setViewName("completedTasks");
+        model.addObject("currentPage", "completedTasks");
+        model.addObject("completedTasks", todoListService.getCompletedTasks());
+        return model;
     }
 
     @PostMapping(value = "/tasks/completed", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -62,6 +65,7 @@ public class TodoController {
 
     private ModelAndView renderTodoList(ModelAndView model) {
         model.setViewName("todoList");
+        model.addObject("currentPage", "tasks");
         model.addObject("tasks", todoListService.getTasks());
         return model;
     }
