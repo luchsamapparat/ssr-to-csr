@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">To-Do App</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
+    <style>
+        .completed,
+        input[type="checkbox"]:checked+label {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/">📝 To-Do App</a>
+            <ul class="navbar-nav collapse navbar-collapse">
+                <li class="nav-item">
+                    <a class="nav-link" th:classappend="${currentPage == 'tasks' ? 'active' : null}" th:attrappend="aria-current=${currentPage == 'tasks' ? 'page' : null}" href="/">Tasks</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:classappend="${currentPage == 'completedTasks' ? 'active' : null}" th:attrappend="aria-current=${currentPage == 'completedTasks' ? 'page' : null}" href="/tasks/completed">Completed Tasks</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <main layout:fragment="content" class="container py-5"></main>
+</body>
+
+</html>

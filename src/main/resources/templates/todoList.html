@@ -1,56 +1,53 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 
 <head>
-    <title>To-Do App</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
-    <style>
-        input[type="checkbox"]:checked+label {
-            text-decoration: line-through;
-        }
-    </style>
+    <title>Tasks</title>
     <script type="module" src="script.js"></script>
 </head>
 
-<body class="container py-5">
-    <p th:if="${tasks.empty}" class="empty-task-list alert alert-success mb-5" role="alert">All done!</p>
+<body>
+    <main layout:fragment="content">
+        <p th:if="${tasks.empty}" class="empty-task-list alert alert-success mb-5" role="alert">All done!</p>
 
-    <form th:if="${!tasks.empty}" th:action="@{/tasks/completed}" method="post" class="task-list mb-5">
-        <ul class="list-unstyled">
-            <li th:each="task : ${tasks}" class="form-check">
-                <input type="checkbox" name="completedTasks[]" th:id="${'completedTasks-' + task.id}" th:value="${task.id}" class="form-check-input completed-task" />
-                <label th:for="${'completedTasks-' + task.id}" class="form-check-label">
-                    <span th:text="${task.description}"></span>
-                    <span th:if="${task.dueDate}" th:text="${#temporals.format(task.dueDate, 'dd.MM.yyyy')}" class="text-secondary ps-2"></span>
-                </label>
-            </li>
-        </ul>
+        <form th:if="${!tasks.empty}" th:action="@{/tasks/completed}" method="post" class="task-list mb-5">
+            <ul class="list-unstyled">
+                <li th:each="task : ${tasks}" class="form-check">
+                    <input type="checkbox" name="completedTasks[]" th:id="${'completedTasks-' + task.id}" th:value="${task.id}" class="form-check-input completed-task" />
+                    <label th:for="${'completedTasks-' + task.id}" class="form-check-label">
+                        <span th:text="${task.description}"></span>
+                        <span th:if="${task.dueDate}" th:text="${#temporals.format(task.dueDate, 'dd.MM.yyyy')}" class="text-secondary ps-2"></span>
+                    </label>
+                </li>
+            </ul>
 
-        <button class="mark-as-completed btn btn-primary">Mark as Completed</button>
-    </form>
+            <button class="mark-as-completed btn btn-primary">Mark as Completed</button>
+        </form>
 
-    <form th:action="@{/tasks}" th:object="${taskForm}" method="post" class="add-task-form row needs-validation was-validated">
-        <div class="col-xl-9 col-lg-8 col-md-6 col-sm-6 mb-3">
-            <label for="addTask-description" class="form-label">New Task</label>
-            <input type="text" th:field="*{description}" id="addTask-description" class="form-control description" placeholder="Add as Task..." th:errorclass="is-invalid" required minlength="1" />
-            <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="invalid-feedback"></div>
-        </div>
+        <form th:action="@{/tasks}" th:object="${taskForm}" method="post" class="add-task-form row needs-validation was-validated">
+            <div class="col-xl-9 col-lg-8 col-md-6 col-sm-6 mb-3">
+                <label for="addTask-description" class="form-label">New Task</label>
+                <input type="text" th:field="*{description}" id="addTask-description" class="form-control description" placeholder="Add as Task..." th:errorclass="is-invalid" required minlength="1" />
+                <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="invalid-feedback"></div>
+            </div>
 
-        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 mb-3">
-            <label for="addTask-dueDate" class="form-label">Due Date</label>
-            <input type="date" th:field="*{dueDate}" id="addTask-dueDate" class="form-control due-date" th:errorclass="is-invalid" th:min="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}" />
-            <div th:if="${#fields.hasErrors('dueDate')}" th:errors="*{dueDate}" class="invalid-feedback"></div>
-        </div>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 mb-3">
+                <label for="addTask-dueDate" class="form-label">Due Date</label>
+                <input type="date" th:field="*{dueDate}" id="addTask-dueDate" class="form-control due-date" th:errorclass="is-invalid" th:min="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}" />
+                <div th:if="${#fields.hasErrors('dueDate')}" th:errors="*{dueDate}" class="invalid-feedback"></div>
+            </div>
 
-        <div class="col-xl-1 col-lg-1 col-md-2 col-sm-2 mb-3 d-flex flex-wrap align-content-start">
-            <button class="add-task btn btn-primary flex-fill" style="margin-top: 32px">
-                Add
-                <span class="d-sm-none">Task</span>
-            </button>
-        </div>
-    </form>
+            <div class="col-xl-1 col-lg-1 col-md-2 col-sm-2 mb-3 d-flex flex-wrap align-content-start">
+                <button class="add-task btn btn-primary flex-fill" style="margin-top: 32px">
+                    Add
+                    <span class="d-sm-none">Task</span>
+                </button>
+            </div>
+        </form>
+    </main>
 </body>
 
 </html>
