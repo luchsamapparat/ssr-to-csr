@@ -5,16 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 
 @Controller
 public class TodoApiController {
@@ -33,6 +29,11 @@ public class TodoApiController {
         return ResponseEntity
             .created(URI.create("/tasks"))
             .build();
+    }
+
+    @GetMapping(value = "/tasks/completed", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getCompletedTasksJson() {
+        return ResponseEntity.ok(todoListService.getCompletedTasks());
     }
 
     @PostMapping(value = "/tasks/completed", consumes = MediaType.APPLICATION_JSON_VALUE)
