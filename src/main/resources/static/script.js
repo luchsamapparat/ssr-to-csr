@@ -1,9 +1,9 @@
 // @ts-check
 
-import { TasksView } from './task-list-view.js';
+import { TasksView } from './tasks-view.js';
 
 const tasksView = new TasksView({
-    el: document.body
+    el: document.querySelector('main')
 });
 tasksView.render();
 

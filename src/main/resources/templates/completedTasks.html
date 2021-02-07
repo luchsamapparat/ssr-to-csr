@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<head>
+    <title>Completed Tasks</title>
+</head>
+
+<body>
+    <main layout:fragment="content">
+        <p th:if="${completedTasks.empty}" class="empty-completed-tasks-list alert alert-success mb-5" role="alert">No tasks have been completed yet.</p>
+
+        <ul th:if="${!completedTasks.empty}" class="completed-tasks-list mb-5">
+            <li th:each="task : ${completedTasks}">
+                <span th:text="${task.description}"></span>
+                <span th:if="${task.dueDate}" th:text="${#temporals.format(task.dueDate, 'dd.MM.yyyy')}" class="text-secondary ps-2"></span>
+            </li>
+        </ul>
+    </main>
+</body>
+
+</html>

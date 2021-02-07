@@ -14,6 +14,10 @@ public class TodoListService {
         return todoList.getTasks();
     }
 
+    List<Task> getCompletedTasks() {
+        return todoList.getCompletedTasks();
+    }
+
     void addTask(String description, LocalDate dueDate) {
         todoList.addTask(new Task(description, dueDate));
     }
