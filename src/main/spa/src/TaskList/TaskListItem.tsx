@@ -17,8 +17,8 @@ const TaskListItem: FunctionComponent<TaskListItemProps> = ({ task, onComplete }
                 id={inputId}
                 value={task.id}
                 className="form-check-input completed-task"
-                onChange={() => onComplete(task.id)}
-            />
+                onChange={() => onComplete(task.id)} />
+                
             <label htmlFor={inputId} className="form-check-label">
                 <span>{task.description}</span>
                 <DueDate dueDate={task.dueDate} />

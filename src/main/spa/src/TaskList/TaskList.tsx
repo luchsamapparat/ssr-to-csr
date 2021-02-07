@@ -12,8 +12,6 @@ const TaskList: FunctionComponent<TaskListProps> = ({ tasks, onCompleteTask }) =
         <ul className="list-unstyled">
             {tasks.map(task => <TaskListItem task={task} onComplete={onCompleteTask} key={task.id} />)}
         </ul>
-
-        <button className="mark-as-completed btn btn-primary">Mark as Completed</button>
     </form>
 );
 
