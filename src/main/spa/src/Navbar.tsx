@@ -6,7 +6,7 @@ type NavbarProps = {}
 const Navbar: FunctionComponent<NavbarProps> = () => (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
-            <a className="navbar-brand" href="/">📝 To-Do App</a>
+            <NavLink className="navbar-brand" to="/">📝 To-Do App</NavLink>
             <ul className="navbar-nav collapse navbar-collapse">
                 <li className="nav-item">
                     <NavLink className="nav-link" activeClassName="active" exact={true} to="/">Tasks</NavLink>
