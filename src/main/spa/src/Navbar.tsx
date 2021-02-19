@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 type NavbarProps = {}
 
 const Navbar: FunctionComponent<NavbarProps> = () => (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand navbar-light bg-light">
         <div className="container">
             <NavLink className="navbar-brand" to="/">📝 To-Do App</NavLink>
             <ul className="navbar-nav collapse navbar-collapse">
