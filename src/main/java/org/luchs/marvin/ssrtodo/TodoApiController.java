@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,6 +18,7 @@ import java.net.URI;
 import java.util.List;
 
 @Controller
+@RequestMapping("/api")
 public class TodoApiController {
 
     @Autowired
@@ -31,7 +33,7 @@ public class TodoApiController {
     public ResponseEntity addTaskJson(@Valid @RequestBody TaskForm taskForm) {
         todoListService.addTask(taskForm.getDescription(), taskForm.getDueDate());
         return ResponseEntity
-            .created(URI.create("/tasks"))
+            .created(URI.create("/api/tasks"))
             .build();
     }
 
@@ -40,7 +42,7 @@ public class TodoApiController {
         todoListService.completeTasks(completedTasksForm.getCompletedTasks());
         return ResponseEntity
             .status(HttpStatus.SEE_OTHER)
-            .location(URI.create("/tasks"))
+            .location(URI.create("/api/tasks"))
             .build();
     }
 

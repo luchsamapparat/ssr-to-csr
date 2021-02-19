@@ -27,7 +27,7 @@ export async function submitForm(form) {
  * @returns {Promise<Response>}
  */
 async function submitUsingFetch(form) {
-    const response = await fetch(form.action, {
+    const response = await fetch(toApiUrl(form.action), {
         method: form.method,
         headers: {
             'Accept': 'application/json',
@@ -41,6 +41,16 @@ async function submitUsingFetch(form) {
     }
 
     return response;
+}
+
+/**
+ * @param {string} url 
+ * @returns {string}
+ */
+const toApiUrl = url => {
+    const apiUrl = new URL(url);
+    apiUrl.pathname = `/api${apiUrl.pathname}`;
+    return apiUrl.toString();
 }
 
 /**
