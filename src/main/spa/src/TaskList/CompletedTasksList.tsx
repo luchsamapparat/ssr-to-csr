@@ -7,7 +7,7 @@ type CompletedTasksListProps = {
 }
 
 const CompletedTasksList: FunctionComponent<CompletedTasksListProps> = ({ tasks }) => (
-    <ul className="list-unstyled">
+    <ul className="mb-5">
         {tasks.map(task => <CompletedTasksListItem task={task} key={task.id} />)}
     </ul>
 );
