@@ -9,11 +9,10 @@ const Navbar: FunctionComponent<NavbarProps> = () => (
             <a className="navbar-brand" href="/">📝 To-Do App</a>
             <ul className="navbar-nav collapse navbar-collapse">
                 <li className="nav-item">
-                {/* th:classNameappend="${currentPage == 'tasks' ? 'active' : null}" th:attrappend="aria-current=${currentPage == 'tasks' ? 'page' : null}"  */}
-                    <NavLink  className="nav-link" to="/">Tasks</NavLink>
+                    <NavLink className="nav-link" activeClassName="active" exact={true} to="/">Tasks</NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink  className="nav-link" to="/tasks/completed">Completed Tasks</NavLink>
+                    <NavLink className="nav-link" activeClassName="active" exact={true} to="/tasks/completed">Completed Tasks</NavLink>
                 </li>
             </ul>
         </div>
