@@ -55,12 +55,12 @@ export const TasksView = Backbone.View.extend({
     createTaskListItem(task) {
         const taskListItemElement = getTemplate('task');
         const checkboxId = `completedTasks-${task.id}`;
-        
+
         /** @type HTMLInputElement */
         const checkbox = taskListItemElement.querySelector('input[type="checkbox"]');
         checkbox.id = checkboxId;
         checkbox.value = task.id;
-        
+
         const label = taskListItemElement.querySelector('label');
         label.htmlFor = checkboxId;
 
@@ -121,8 +121,8 @@ export const TasksView = Backbone.View.extend({
  * @param {string} date 
  */
 const formatDate = date => new Intl.DateTimeFormat(
-    undefined,
-    { year: 'numeric', month: '2-digit', day: '2-digit' }
+    navigator.language,
+    { year: '2-digit', month: '2-digit', day: '2-digit' }
 )
     .format(new Date(date));
 
