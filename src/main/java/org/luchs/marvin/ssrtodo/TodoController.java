@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 public class TodoController {
@@ -20,8 +22,8 @@ public class TodoController {
     private TodoListService todoListService;
 
     @GetMapping("/")
-    public ModelAndView get(TaskForm taskForm) {
-        return renderTodoList();
+    public ModelAndView get(TaskForm taskForm, Locale locale) {
+        return renderTodoList(locale);
     }
 
     @GetMapping("/tasks")
@@ -30,11 +32,11 @@ public class TodoController {
     }
 
     @PostMapping(value = "/tasks", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ModelAndView processTaskForm(@Valid TaskForm taskForm, BindingResult bindingResult) {
+    public ModelAndView processTaskForm(@Valid TaskForm taskForm, BindingResult bindingResult, Locale locale) {
         if (bindingResult.hasErrors()) {
             ModelAndView model = new ModelAndView();
             model.setStatus(HttpStatus.UNPROCESSABLE_ENTITY);
-            return renderTodoList(model);
+            return renderTodoList(model, locale);
         }
 
         todoListService.addTask(taskForm.getDescription(), taskForm.getDueDate());
@@ -42,11 +44,11 @@ public class TodoController {
     }
 
     @GetMapping("/tasks/completed")
-    public ModelAndView getCompletedTasks(ModelAndView model) {
+    public ModelAndView getCompletedTasks(ModelAndView model, Locale locale) {
         model.setViewName("completedTasks");
         model.addObject("currentPage", "completedTasks");
         model.addObject("completedTasks", todoListService.getCompletedTasks());
-        return model;
+        return render(model, locale);
     }
 
     @PostMapping(value = "/tasks/completed", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -59,14 +61,20 @@ public class TodoController {
         return new ModelAndView("redirect:/");
     }
 
-    private ModelAndView renderTodoList() {
-        return renderTodoList(new ModelAndView());
+    private ModelAndView renderTodoList(Locale locale) {
+        return renderTodoList(new ModelAndView(), locale);
     }
 
-    private ModelAndView renderTodoList(ModelAndView model) {
+    private ModelAndView renderTodoList(ModelAndView model, Locale locale) {
         model.setViewName("todoList");
         model.addObject("currentPage", "tasks");
         model.addObject("tasks", todoListService.getTasks());
+        return render(model, locale);
+    }
+
+    private ModelAndView render(ModelAndView model, Locale locale) {
+        model.addObject("DateUtils", DateUtils.class);
+        model.addObject("locale", locale);
         return model;
     }
 
