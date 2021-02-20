@@ -15,7 +15,7 @@
         <ul th:if="${!completedTasks.empty}" class="completed-tasks-list mb-5">
             <li th:each="task : ${completedTasks}">
                 <span th:text="${task.description}"></span>
-                <span th:if="${task.dueDate}" th:text="${#temporals.format(task.dueDate, 'dd.MM.yyyy')}" class="text-secondary ps-2"></span>
+                <span th:title="${DateUtils.formatShortDateTime(task.completedDate, locale)}" th:text="${DateUtils.formatRelativeDate(task.completedDate, locale)}" class="text-secondary ps-2"></span>
             </li>
         </ul>
     </main>

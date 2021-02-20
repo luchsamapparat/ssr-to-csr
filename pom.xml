@@ -37,8 +37,9 @@
 			<version>2.0.5</version>
 		</dependency>
 		<dependency>
-			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-java8time</artifactId>
+			<groupId>org.ocpsoft.prettytime</groupId>
+			<artifactId>prettytime</artifactId>
+			<version>5.0.0.Final</version>
 		</dependency>
 
 		<dependency>

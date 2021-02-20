@@ -1,6 +1,7 @@
 package org.luchs.marvin.ssrtodo;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Task {
@@ -9,6 +10,7 @@ public class Task {
     private final String description;
     private final LocalDate dueDate;
     private boolean completed = false;
+    private LocalDateTime completedDate;
 
     public Task(String description, LocalDate dueDate) {
         this.id = UUID.randomUUID().toString();
@@ -28,11 +30,16 @@ public class Task {
         return dueDate;
     }
 
+    public LocalDateTime getCompletedDate() {
+        return completedDate;
+    }
+
     public boolean isCompleted() {
         return completed;
     }
 
     public void markAsCompleted() {
-        this.completed = true;
+        completed = true;
+        completedDate = LocalDateTime.now();
     }
 }
