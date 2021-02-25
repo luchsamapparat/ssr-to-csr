@@ -16,7 +16,7 @@
 
 	<properties>
 		<java.version>12</java.version>
-	</properties>
+    </properties>
 
 	<dependencies>
 		<dependency>
@@ -103,7 +103,7 @@
 						</goals>
 						<configuration>
 							<target>
-								<copy todir="${project.build.outputDirectory}/resources">
+								<copy todir="${project.build.outputDirectory}/static">
 									<fileset dir="${project.basedir}/src/main/frontend/build/" />
 								</copy>
 							</target>
@@ -111,7 +111,7 @@
 					</execution>
 				</executions>
 			</plugin>
-		</plugins>
+        </plugins>
 	</build>
 
 </project>
