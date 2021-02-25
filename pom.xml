@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.luchs.marvin</groupId>
-	<artifactId>ssr-todo</artifactId>
+	<artifactId>todo-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ssr-todo</name>
+	<name>todo-app</name>
 	<description>Server-Side Rendering To-Do App</description>
 
 	<properties>
