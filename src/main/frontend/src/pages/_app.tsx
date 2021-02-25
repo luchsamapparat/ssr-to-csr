@@ -1,22 +1,20 @@
-import React, { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { AppProps } from 'next/app';
+import Head from 'next/head';
 import Navbar from '../components/navbar';
 
-const CompletedTasks = lazy(() => import('./tasks/completed'));
-const Tasks = lazy(() => import('./index'));
-
-const App = () => (
-    <Router>
+const App = ({ Component, pageProps }: AppProps) => (
+    <>
+        <Head>
+            <title>To-Do App</title>
+            <meta charSet="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossOrigin="anonymous" />
+        </Head>
         <Navbar />
         <main className="container py-5">
-            <Suspense fallback={<div>Loading...</div>}>
-                <Switch>
-                    <Route exact path="/" component={Tasks} />
-                    <Route exact path="/tasks/completed" component={CompletedTasks} />
-                </Switch>
-            </Suspense>
+            <Component {...pageProps} />
         </main>
-    </Router>
+    </>
 );
 
 export default App;

@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import { GetServerSideProps } from 'next';
+import React, { FunctionComponent } from 'react';
 import CompletedTasksList from '../../components/task-list/completed-tasks-list';
 import EmptyListAlert from '../../components/task-list/empty-list-alert';
 import { get } from '../../lib/http';
 import { Task } from '../../lib/task';
 
-const CompletedTasks = () => {
-    const [tasks, setTasks] = useState<Task[] | null>(null);
+type CompletedTasksProps = {
+    tasks: Task[]
+};
 
-    useEffect(
-        () => {
-            get('/tasks/completed')
-                .then(tasks => setTasks(tasks));
-        },
-        []
-    );
-
+const CompletedTasks: FunctionComponent<CompletedTasksProps> = ({ tasks }) => {
     return (<>
         {(tasks === null) ? null :
             (tasks.length === 0) ?
@@ -25,3 +20,11 @@ const CompletedTasks = () => {
 };
 
 export default CompletedTasks;
+
+export const getServerSideProps: GetServerSideProps = async context => {
+    return {
+        props: {
+            tasks: await get('/tasks/completed')
+        }
+    }
+}

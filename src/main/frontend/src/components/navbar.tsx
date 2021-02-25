@@ -1,22 +1,27 @@
-import React, { FunctionComponent } from 'react';
-import { NavLink } from 'react-router-dom';
+import Link from 'next/link';
+import { FunctionComponent } from 'react';
+import NavLink from './nav-link';
 
 type NavbarProps = {}
 
-const Navbar: FunctionComponent<NavbarProps> = () => (
-    <nav className="navbar navbar-expand navbar-light bg-light">
-        <div className="container">
-            <NavLink className="navbar-brand" to="/">📝 To-Do App</NavLink>
-            <ul className="navbar-nav collapse navbar-collapse">
-                <li className="nav-item">
-                    <NavLink className="nav-link" activeClassName="active" exact={true} to="/">Tasks</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink className="nav-link" activeClassName="active" exact={true} to="/tasks/completed">Completed Tasks</NavLink>
-                </li>
-            </ul>
-        </div>
-    </nav>
-);
+const Navbar: FunctionComponent<NavbarProps> = () => {
+    return (
+        <nav className="navbar navbar-expand navbar-light bg-light">
+            <div className="container">
+                <Link href="/">
+                    <a className="navbar-brand">📝 To-Do App</a>
+                </Link>
+                <ul className="navbar-nav collapse navbar-collapse">
+                    <li className="nav-item">
+                        <NavLink href="/">Tasks</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink href="/tasks/completed">Completed Tasks</NavLink>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    );
+};
 
 export default Navbar;

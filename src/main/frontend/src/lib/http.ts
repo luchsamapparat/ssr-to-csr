@@ -1,7 +1,9 @@
 type Method = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
 
+const isBrowser = typeof window !== 'undefined';
+
 export async function get(url: string) {
-    const response = await fetch(`/api${url}`, {
+    const response = await fetch(toApiUrl(`/api${url}`), {
         method: 'GET',
         headers: {
             'Accept': 'application/json'
@@ -11,7 +13,7 @@ export async function get(url: string) {
 }
 
 export async function submit<T = any>(url: string, method: Method, jsonBody: T) {
-    let response = await submitUsingFetch(`/api${url}`, method, jsonBody);
+    let response = await submitUsingFetch(url, method, jsonBody);
 
     const responseBody = await response.json();
 
@@ -22,8 +24,10 @@ export async function submit<T = any>(url: string, method: Method, jsonBody: T) 
     return responseBody;
 }
 
+const toApiUrl = (url: string) => isBrowser ? url : `http://localhost:8080${url}`
+
 async function submitUsingFetch<T = any>(url: string, method: Method, jsonBody: T) {
-    const response = await fetch(url, {
+    const response = await fetch(toApiUrl(`/api${url}`), {
         method,
         headers: {
             'Accept': 'application/json',
