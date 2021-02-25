@@ -1,9 +1,9 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navbar from './Navbar';
+import Navbar from '../components/navbar';
 
-const CompletedTasks = lazy(() => import('./CompletedTasks'));
-const Tasks = lazy(() => import('./Tasks'));
+const CompletedTasks = lazy(() => import('./tasks/completed'));
+const Tasks = lazy(() => import('./index'));
 
 const App = () => (
     <Router>

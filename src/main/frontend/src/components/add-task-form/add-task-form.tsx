@@ -1,8 +1,8 @@
 import React, { FormEvent, FunctionComponent, useState } from 'react';
-import { NewTask } from '../task';
-import { ValidationError } from '../validation';
-import DescriptionInput from './DescriptionInput';
-import DueDateInput from './DueDateInput';
+import { NewTask } from '../../lib/task';
+import { ValidationError } from '../../lib/validation';
+import DescriptionInput from './description-input';
+import DueDateInput from './due-date-input';
 
 type AddTaskFormProps = {
     onAddTask: (newTask: NewTask) => Promise<void>
@@ -45,7 +45,7 @@ const AddTaskForm: FunctionComponent<AddTaskFormProps> = ({ onAddTask }) => {
                 value={description}
                 violations={getViolations(validationError, 'description')}
                 onChange={setDescription} />
-            
+
             <DueDateInput
                 value={dueDate}
                 violations={getViolations(validationError, 'dueDate')}

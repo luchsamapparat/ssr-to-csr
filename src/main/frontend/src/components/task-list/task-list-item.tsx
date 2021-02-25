@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { Task } from '../task';
-import DueDate from './DueDate';
+import { Task } from '../../lib/task';
+import DueDate from './due-date';
 
 type TaskListItemProps = {
     task: Task,
@@ -18,7 +18,7 @@ const TaskListItem: FunctionComponent<TaskListItemProps> = ({ task, onComplete }
                 value={task.id}
                 className="form-check-input completed-task"
                 onChange={() => onComplete(task.id)} />
-                
+
             <label htmlFor={inputId} className="form-check-label">
                 <span>{task.description}</span>
                 <DueDate dueDate={task.dueDate} />

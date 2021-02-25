@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import AddTaskForm from './AddTaskForm/AddTaskForm';
-import { get, submit } from './http';
-import { NewTask, Task } from './task';
-import EmptyTaskList from './TaskList/EmptyListAlert';
-import TaskList from './TaskList/TaskList';
-import { ValidationError } from './validation';
+import AddTaskForm from '../components/add-task-form/add-task-form';
+import EmptyTaskList from '../components/task-list/empty-list-alert';
+import TaskList from '../components/task-list/task-list';
+import { get, submit } from '../lib/http';
+import { NewTask, Task } from '../lib/task';
+import { ValidationError } from '../lib/validation';
 
 const Tasks = () => {
     const [tasks, setTasks] = useState<Task[] | null>(null);

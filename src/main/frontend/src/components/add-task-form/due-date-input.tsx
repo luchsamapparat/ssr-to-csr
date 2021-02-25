@@ -1,5 +1,5 @@
 import React, { FormEvent, FunctionComponent } from 'react';
-import { getInvalidFormControlCssClass, Violation } from '../validation';
+import { getInvalidFormControlCssClass, Violation } from '../../lib/validation';
 
 type DueDateInputProps = {
     value: string | null,
@@ -10,7 +10,7 @@ type DueDateInputProps = {
 const DueDateInput: FunctionComponent<DueDateInputProps> = ({ value, onChange, violations }) => {
     const handleInput = ({ currentTarget }: FormEvent<HTMLInputElement>) => currentTarget.setCustomValidity('');
     const handleInvalid = ({ currentTarget }: FormEvent<HTMLInputElement>) => currentTarget.setCustomValidity('Please pick a future date.');
-    
+
     const today = toIsoDate(new Date());
 
     const handleChange = (dueDate: string) => (dueDate.length === 0) ? onChange(null) : onChange(dueDate);

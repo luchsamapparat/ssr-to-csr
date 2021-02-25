@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { get } from './http';
-import { Task } from './task';
-import CompletedTasksList from './TaskList/CompletedTasksList';
-import EmptyListAlert from './TaskList/EmptyListAlert';
+import CompletedTasksList from '../../components/task-list/completed-tasks-list';
+import EmptyListAlert from '../../components/task-list/empty-list-alert';
+import { get } from '../../lib/http';
+import { Task } from '../../lib/task';
 
 const CompletedTasks = () => {
     const [tasks, setTasks] = useState<Task[] | null>(null);

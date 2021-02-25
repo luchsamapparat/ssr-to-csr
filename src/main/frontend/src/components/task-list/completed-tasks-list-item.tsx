@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { Task } from '../task';
-import DueDate from './DueDate';
+import { Task } from '../../lib/task';
+import DueDate from './due-date';
 
 type CompletedTasksListItemProps = {
     task: Task

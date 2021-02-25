@@ -1,5 +1,5 @@
 import React, { FormEvent, FunctionComponent } from 'react';
-import { getInvalidFormControlCssClass, Violation } from '../validation';
+import { getInvalidFormControlCssClass, Violation } from '../../lib/validation';
 
 type DescriptionInputProps = {
     value: string,
@@ -19,7 +19,7 @@ const DescriptionInput: FunctionComponent<DescriptionInputProps> = ({ value, onC
                 id="addTask-description"
                 value={value}
                 className={`form-control description ${getInvalidFormControlCssClass(violations)}`}
-                placeholder="Add as Task..." 
+                placeholder="Add as Task..."
                 required
                 minLength={1}
                 onInput={handleInput}

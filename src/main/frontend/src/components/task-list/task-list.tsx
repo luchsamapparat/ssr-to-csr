@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { Task } from '../task';
-import TaskListItem from './TaskListItem';
+import { Task } from '../../lib/task';
+import TaskListItem from './task-list-item';
 
 type TaskListProps = {
     tasks: Task[],
