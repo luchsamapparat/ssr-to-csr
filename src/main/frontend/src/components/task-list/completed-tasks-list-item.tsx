@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Task } from '../../lib/task';
-import DueDate from './due-date';
+import CompletedDate from './completed-date';
 
 type CompletedTasksListItemProps = {
     task: Task
@@ -10,7 +10,7 @@ const CompletedTasksListItem: FunctionComponent<CompletedTasksListItemProps> = (
     return (
         <li>
             <span>{task.description}</span>
-            <DueDate dueDate={task.dueDate} />
+            <CompletedDate completedDate={task.completedDate} />
         </li>
     );
 };
