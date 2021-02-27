@@ -24,7 +24,10 @@ export async function submit<T = any>(url: string, method: Method, jsonBody: T) 
     return responseBody;
 }
 
-const toApiUrl = (url: string) => `${process.env.NEXT_PUBLIC_HOST}${url}`;
+const toApiUrl = (url: string) => {
+    const isBrowser = typeof window !== 'undefined';
+    return isBrowser ? url : `${process.env.NEXT_PUBLIC_HOST}${url}`;
+};
 
 async function submitUsingFetch<T = any>(url: string, method: Method, jsonBody: T) {
     const response = await fetch(toApiUrl(`/api${url}`), {
