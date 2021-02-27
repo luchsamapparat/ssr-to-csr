@@ -12,7 +12,7 @@ import java.io.IOException;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    @Value("classPath:/index.html")
+    @Value("classPath:/static/index.html")
     private Resource indexHtml;
 
     private final String[] assets = {
