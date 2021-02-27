@@ -18,8 +18,12 @@ const CompletedDate: FunctionComponent<CompletedDateProps> = ({ completedDate })
     return <span className="text-secondary ps-2">{formatDate(completedDate, language)}</span>;
 };
 
-TimeAgo.addLocale(de);
-TimeAgo.addDefaultLocale(en);
+try {
+    // TimeAgo throws an exception when this is executed more than once
+    // which happens when using Next.js' development mode
+    TimeAgo.addLocale(de);
+    TimeAgo.addDefaultLocale(en);
+} catch (_) { }
 
 const formatDate = (date: string, language: string) => new TimeAgo(language).format(new Date(date));
 
