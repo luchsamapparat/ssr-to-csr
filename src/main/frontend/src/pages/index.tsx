@@ -4,7 +4,7 @@ import AddTaskForm from '../components/add-task-form/add-task-form';
 import EmptyTaskList from '../components/task-list/empty-list-alert';
 import TaskList from '../components/task-list/task-list';
 import { get, submit } from '../lib/http';
-import { getLanguage, LanguageContext } from '../lib/language-context';
+import { getLanguage, LanguageContext } from '../lib/language';
 import { NewTask, Task } from '../lib/task';
 import { ValidationError } from '../lib/validation';
 
