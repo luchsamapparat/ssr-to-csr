@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CompletedTasksList from '../../components/task-list/completed-tasks-list';
 import EmptyListAlert from '../../components/task-list/empty-list-alert';
 import { get } from '../../lib/http';
-import { LanguageContext } from '../../lib/language-context';
+import { LanguageContext } from '../../lib/language';
 import { Task } from '../../lib/task';
 
 const CompletedTasks = () => {
