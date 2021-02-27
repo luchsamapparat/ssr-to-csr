@@ -2,7 +2,7 @@ import TimeAgo from 'javascript-time-ago';
 import de from 'javascript-time-ago/locale/de';
 import en from 'javascript-time-ago/locale/en';
 import React, { FunctionComponent, useContext } from 'react';
-import { LanguageContext } from '../../lib/language-context';
+import { LanguageContext } from '../../lib/language';
 
 type CompletedDateProps = {
     completedDate: string | null

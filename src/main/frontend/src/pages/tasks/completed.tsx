@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 import CompletedTasksList from '../../components/task-list/completed-tasks-list';
 import EmptyListAlert from '../../components/task-list/empty-list-alert';
 import { get } from '../../lib/http';
-import { getLanguage, LanguageContext } from '../../lib/language-context';
+import { getLanguage, LanguageContext } from '../../lib/language';
 import { Task } from '../../lib/task';
 
 type CompletedTasksProps = {
