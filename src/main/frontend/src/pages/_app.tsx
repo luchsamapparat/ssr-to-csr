@@ -1,5 +1,7 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import React from 'react';
+import Footer from '../components/footer';
 import Navbar from '../components/navbar';
 
 const App = ({ Component, pageProps }: AppProps) => (
@@ -14,6 +16,7 @@ const App = ({ Component, pageProps }: AppProps) => (
         <main className="container py-5">
             <Component {...pageProps} />
         </main>
+        <Footer />
     </>
 );
 
