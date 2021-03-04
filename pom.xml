@@ -16,7 +16,7 @@
 
 	<properties>
 		<java.version>12</java.version>
-    </properties>
+	</properties>
 
 	<dependencies>
 		<dependency>
