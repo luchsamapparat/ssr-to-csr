@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Footer from '../components/footer';
 import Navbar from '../components/navbar';
 
 const CompletedTasks = lazy(() => import('./tasks/completed'));
@@ -16,6 +17,7 @@ const App = () => (
                 </Switch>
             </Suspense>
         </main>
+        <Footer />
     </Router>
 );
 
