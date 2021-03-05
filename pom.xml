@@ -10,12 +10,12 @@
 	</parent>
 	<groupId>org.luchs.marvin</groupId>
 	<artifactId>todo-app</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>5.0.0-SNAPSHOT</version>
 	<name>todo-app</name>
 	<description>Server-Side Rendering To-Do App</description>
 
 	<properties>
-		<java.version>12</java.version>
+		<java.version>15</java.version>
 	</properties>
 
 	<dependencies>
