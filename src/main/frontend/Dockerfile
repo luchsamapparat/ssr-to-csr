@@ -8,7 +8,7 @@ FROM node:alpine AS builder
 WORKDIR /app
 
 ENV NODE_ENV production
-ENV NEXT_PUBLIC_HOST http://06-ssr-with-rehydration-backend:8086
+ENV NEXT_PUBLIC_HOST http://06-ssr-with-rehydration-backend:8080
 
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
