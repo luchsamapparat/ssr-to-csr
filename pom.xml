@@ -16,6 +16,7 @@
 
 	<properties>
 		<java.version>15</java.version>
+		<skipFrontend>false</skipFrontend>
 	</properties>
 
 	<dependencies>
@@ -60,6 +61,7 @@
 				<artifactId>frontend-maven-plugin</artifactId>
 				<version>1.9.1</version>
 				<configuration>
+					<skip>${skipFrontend}</skip>
 					<nodeVersion>v14.16.0</nodeVersion>
 					<workingDirectory>src/main/frontend</workingDirectory>
 					<installDirectory>.node</installDirectory>
