@@ -6,14 +6,16 @@ RUN npm ci
 
 FROM node:alpine AS builder
 WORKDIR /app
+
+ENV NODE_ENV production
+ENV NEXT_PUBLIC_HOST http://06-ssr-with-rehydration-backend:8086
+
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
 RUN npm run build
 
 FROM node:alpine AS runner
 WORKDIR /app
-
-ENV NODE_ENV production
 
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
