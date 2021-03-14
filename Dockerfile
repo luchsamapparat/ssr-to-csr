@@ -6,7 +6,7 @@ COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
 
-RUN ./mvnw install -DskipTests
+RUN ./mvnw install -DskipTests -DskipFrontend
 
 FROM openjdk:15-jdk-alpine
 
