@@ -42,7 +42,7 @@
         <form th:action="@{/tasks}" th:object="${taskForm}" method="post" class="add-task-form row needs-validation was-validated">
             <div class="col-xl-9 col-lg-8 col-md-6 col-sm-6 mb-3">
                 <label for="addTask-description" class="form-label">New Task</label>
-                <input type="text" th:field="*{description}" id="addTask-description" class="form-control description" placeholder="Add as Task..." th:errorclass="is-invalid" required minlength="1" />
+                <input type="text" th:field="*{description}" id="addTask-description" class="form-control description" placeholder="Add a Task..." th:errorclass="is-invalid" required minlength="1" />
                 <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="invalid-feedback"></div>
             </div>
 
