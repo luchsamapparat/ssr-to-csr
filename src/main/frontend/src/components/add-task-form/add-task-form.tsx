@@ -53,7 +53,7 @@ const AddTaskForm: FunctionComponent<AddTaskFormProps> = ({ onAddTask }) => {
 
             <div className="col-xl-1 col-lg-1 col-md-2 col-sm-2 mb-3 d-flex flex-wrap align-content-start">
                 <button className="add-task btn btn-primary flex-fill" style={{ marginTop: '32px' }}>
-                    Add
+                    Add{' '}
                     <span className="d-sm-none">Task</span>
                 </button>
             </div>
