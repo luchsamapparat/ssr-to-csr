@@ -4,10 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run build:css && next build",
     "build:css": "node ./scripts/build-css.js",
-    "start": "next start",
-    "postinstall": "npm run build:css"
+    "start": "next start"
   },
   "dependencies": {
     "javascript-time-ago": "2.3.4",
