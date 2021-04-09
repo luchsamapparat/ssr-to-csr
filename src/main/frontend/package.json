@@ -26,8 +26,7 @@
     "build": "npm run build:css && react-scripts build",
     "build:css": "node ./scripts/build-css.js",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "postinstall": "npm run build:css"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
