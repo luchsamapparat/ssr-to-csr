@@ -12,7 +12,7 @@
 	<artifactId>todo-app</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<name>todo-app</name>
-	<description>Server-Side Rendering To-Do App</description>
+	<description>To-Do App illustrating server-side vs. client-side rendering</description>
 
 	<properties>
 		<java.version>15</java.version>
