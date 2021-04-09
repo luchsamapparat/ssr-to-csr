@@ -1,0 +1,14 @@
+{
+  "name": "todo-app-styles",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "postinstall": "node index.js"
+  },
+  "dependencies": {
+    "bootstrap": "4.6.0",
+    "clean-css": "5.1.2",
+    "purgecss": "4.0.3"
+  }
+}
