@@ -1,5 +1,6 @@
 package org.luchs.marvin.ssrtodo;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,13 +12,17 @@ public class TodoList {
 
     List<Task> getTasks() {
         return tasks.values()
-            .stream().filter(task -> !task.isCompleted())
+            .stream()
+            .filter(task -> !task.isCompleted())
+            .sorted(Comparator.comparing(Task::getDescription))
             .collect(Collectors.toList());
     }
 
     List<Task> getCompletedTasks() {
         return tasks.values()
-            .stream().filter(task -> task.isCompleted())
+            .stream()
+            .filter(task -> task.isCompleted())
+            .sorted(Comparator.comparing(Task::getDescription))
             .collect(Collectors.toList());
     }
 
