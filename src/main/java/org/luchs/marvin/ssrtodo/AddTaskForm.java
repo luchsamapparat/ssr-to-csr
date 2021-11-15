@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
-public class TaskForm {
+public class AddTaskForm {
 
     @NotNull
     @Size(min = 1, message = "Please enter a task.")
@@ -17,7 +17,7 @@ public class TaskForm {
     @Future(message = "Please pick a future date.")
     private final LocalDate dueDate;
 
-    public TaskForm(String description, LocalDate dueDate) {
+    public AddTaskForm(String description, LocalDate dueDate) {
         this.description = description;
         this.dueDate = dueDate;
     }

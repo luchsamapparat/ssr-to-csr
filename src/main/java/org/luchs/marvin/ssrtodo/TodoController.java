@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 
@@ -22,7 +21,7 @@ public class TodoController {
     private TodoListService todoListService;
 
     @GetMapping("/")
-    public ModelAndView get(TaskForm taskForm, Locale locale) {
+    public ModelAndView get(AddTaskForm addTaskForm, Locale locale) {
         return renderTodoList(locale);
     }
 
@@ -32,14 +31,14 @@ public class TodoController {
     }
 
     @PostMapping(value = "/tasks", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ModelAndView processTaskForm(@Valid TaskForm taskForm, BindingResult bindingResult, Locale locale) {
+    public ModelAndView processTaskForm(@Valid AddTaskForm addTaskForm, BindingResult bindingResult, Locale locale) {
         if (bindingResult.hasErrors()) {
             ModelAndView model = new ModelAndView();
             model.setStatus(HttpStatus.UNPROCESSABLE_ENTITY);
             return renderTodoList(model, locale);
         }
 
-        todoListService.addTask(taskForm.getDescription(), taskForm.getDueDate());
+        todoListService.addTask(addTaskForm.getDescription(), addTaskForm.getDueDate());
         return redirectToTasks();
     }
 
