@@ -30,7 +30,7 @@ public class TodoApiController {
     }
 
     @PostMapping(value = "/tasks", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity addTaskJson(@Valid @RequestBody TaskForm taskForm) {
+    public ResponseEntity addTaskJson(@Valid @RequestBody AddTaskForm taskForm) {
         todoListService.addTask(taskForm.getDescription(), taskForm.getDueDate());
         return ResponseEntity
             .created(URI.create("/api/tasks"))
