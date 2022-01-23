@@ -1,46 +1,46 @@
-import React, { FormEvent, FunctionComponent, useState } from 'react';
-import { NewTask } from '../../lib/task';
+import React, { FunctionComponent, useState } from 'react';
+import { Form } from 'remix';
 import { ValidationError } from '../../lib/validation';
 import DescriptionInput from './description-input';
 import DueDateInput from './due-date-input';
 
 type AddTaskFormProps = {
-    onAddTask: (newTask: NewTask) => Promise<void>
+    action: string
 };
 
-const AddTaskForm: FunctionComponent<AddTaskFormProps> = ({ onAddTask }) => {
+const AddTaskForm: FunctionComponent<AddTaskFormProps> = ({ action }) => {
     const [description, setDescription] = useState('');
     const [dueDate, setDueDate] = useState<string | null>(null);
     const [validationError, setValidationError] = useState<ValidationError | null>(null);
     const [isDirty, setIsDirty] = useState(false);
 
-    const clearForm = () => {
-        setDescription('');
-        setDueDate(null);
-        setValidationError(null);
-        setIsDirty(false);
-    };
+    // const clearForm = () => {
+    //     setDescription('');
+    //     setDueDate(null);
+    //     setValidationError(null);
+    //     setIsDirty(false);
+    // };
 
     const handleChange = () => {
         setIsDirty(true);
     };
 
-    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        try {
-            await onAddTask({ description, dueDate });
-            clearForm();
-        } catch (error) {
-            if (error instanceof ValidationError) {
-                setValidationError(error);
-            }
-        }
-    };
+    // const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    //     event.preventDefault();
+    //     try {
+    //         await onAddTask({ description, dueDate });
+    //         clearForm();
+    //     } catch (error) {
+    //         if (error instanceof ValidationError) {
+    //             setValidationError(error);
+    //         }
+    //     }
+    // };
 
     const formValidatedCssClass = (isDirty && validationError === null) ? 'was-validated' : '';
 
     return (
-        <form className={`add-task-form row needs-validation ${formValidatedCssClass}`} onChange={handleChange} onSubmit={handleSubmit}>
+        <Form method="post" action={action} className={`add-task-form row needs-validation ${formValidatedCssClass}`} onChange={handleChange}>
             <DescriptionInput
                 value={description}
                 violations={getViolations(validationError, 'description')}
@@ -57,7 +57,7 @@ const AddTaskForm: FunctionComponent<AddTaskFormProps> = ({ onAddTask }) => {
                     <span className="d-sm-none">Task</span>
                 </button>
             </div>
-        </form>
+        </Form>
     );
 };
 

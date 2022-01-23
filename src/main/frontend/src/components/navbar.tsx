@@ -1,6 +1,5 @@
-import Link from 'next/link';
 import { FunctionComponent } from 'react';
-import NavLink from './nav-link';
+import { Link, NavLink } from 'remix';
 
 type NavbarProps = {}
 
@@ -8,15 +7,13 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
     return (
         <nav className="navbar navbar-expand navbar-light bg-light">
             <div className="container">
-                <Link href="/">
-                    <a className="navbar-brand">📝 To-Do App</a>
-                </Link>
+                <Link to="/" className="navbar-brand">📝 To-Do App</Link>
                 <ul className="navbar-nav collapse navbar-collapse">
                     <li className="nav-item">
-                        <NavLink href="/">Tasks</NavLink>
+                        <NavLink className="nav-link" to="/">Tasks</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink href="/tasks/completed">Completed Tasks</NavLink>
+                        <NavLink className="nav-link" to="/tasks/completed">Completed Tasks</NavLink>
                     </li>
                 </ul>
             </div>

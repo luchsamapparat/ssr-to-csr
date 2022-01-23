@@ -17,6 +17,7 @@ const DescriptionInput: FunctionComponent<DescriptionInputProps> = ({ value, onC
             <input
                 type="text"
                 id="addTask-description"
+                name="description"
                 value={value}
                 className={`form-control description ${getInvalidFormControlCssClass(violations)}`}
                 placeholder="Add a Task..."

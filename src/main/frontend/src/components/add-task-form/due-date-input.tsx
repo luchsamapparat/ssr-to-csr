@@ -21,6 +21,7 @@ const DueDateInput: FunctionComponent<DueDateInputProps> = ({ value, onChange, v
             <input
                 type="date"
                 id="addTask-dueDate"
+                name="dueDate"
                 value={(value === null) ? '' : value}
                 className={`form-control due-date ${getInvalidFormControlCssClass(violations)}`}
                 min={today}

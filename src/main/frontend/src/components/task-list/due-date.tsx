@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useContext } from 'react';
-import { LanguageContext } from '../../lib/language';
+import { LanguageContext } from '../../lib/language-context';
 
 type DueDateProps = {
     dueDate: string | null
