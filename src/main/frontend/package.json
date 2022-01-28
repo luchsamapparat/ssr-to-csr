@@ -5,8 +5,9 @@
   "license": "",
   "scripts": {
     "build": "remix build",
+    "build:css": "node ./scripts/build-css.js",
     "dev": "remix dev",
-    "postinstall": "remix setup node",
+    "postinstall": "remix setup node && npm run build:css",
     "start": "remix-serve build"
   },
   "dependencies": {

@@ -5,7 +5,6 @@ const { PurgeCSS } = require('purgecss');
 (async () => {
     const result = await new PurgeCSS().purge({
         content: [
-            './public/**/*.html',
             './src/**/*.tsx',
             './src/**/*.ts'
         ],
@@ -15,5 +14,5 @@ const { PurgeCSS } = require('purgecss');
     const cleanCSS = new CleanCSS({ returnPromise: true });
     const { styles } = await cleanCSS.minify(result[0].css);
 
-    writeFile('./styles/styles.css', styles);
+    writeFile('./public/styles.css', styles);
 })();
