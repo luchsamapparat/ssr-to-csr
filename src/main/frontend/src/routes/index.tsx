@@ -45,7 +45,7 @@ export default function Tasks() {
             {(tasks === null) ? null :
                 (tasks.length === 0) ?
                     <EmptyTaskList text="All done!" /> :
-                    <TaskList tasks={tasks} onCompleteTask={handleCompleteTask} />
+                    <TaskList action="/?index" tasks={tasks} />
             }
             <AddTaskForm action="/?index" />
         </>

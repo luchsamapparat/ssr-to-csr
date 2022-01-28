@@ -8,3 +8,5 @@ hydrate(
     </LanguageContext.Provider>,
     document
 );
+
+document.documentElement.classList.add("js");
