@@ -4,10 +4,10 @@ import { getInvalidFormControlCssClass, Violation } from '../../lib/validation';
 type DescriptionInputProps = {
     value: string,
     violations: Violation[] | undefined,
-    onChange: (value: string) => void
+    onChange?: (value: string) => void
 };
 
-const DescriptionInput: FunctionComponent<DescriptionInputProps> = ({ value, onChange, violations }) => {
+const DescriptionInput: FunctionComponent<DescriptionInputProps> = ({ value, onChange = () => undefined, violations }) => {
     const handleInput = ({ currentTarget }: FormEvent<HTMLInputElement>) => currentTarget.setCustomValidity('');
     const handleInvalid = ({ currentTarget }: FormEvent<HTMLInputElement>) => currentTarget.setCustomValidity('Please enter a task.');
 
@@ -18,7 +18,7 @@ const DescriptionInput: FunctionComponent<DescriptionInputProps> = ({ value, onC
                 type="text"
                 id="addTask-description"
                 name="description"
-                value={value}
+                defaultValue={value}
                 className={`form-control description ${getInvalidFormControlCssClass(violations)}`}
                 placeholder="Add a Task..."
                 required

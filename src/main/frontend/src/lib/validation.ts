@@ -1,3 +1,21 @@
+export interface ConstraintViolation {
+    type: 'https://zalando.github.io/problem/constraint-violation',
+    status: 422,
+    violations: Violation[],
+    title: string
+}
+
+export const isConstraintViolation = (error: unknown): error is ConstraintViolation => {
+    return (
+        typeof error === 'object' &&
+        error !== null &&
+        'type' in error &&
+        // @ts-ignore
+        error['type'] === 'https://zalando.github.io/problem/constraint-violation'
+    )
+}
+
+
 export interface Violation {
     field: string;
     message: string;

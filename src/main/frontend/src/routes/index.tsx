@@ -1,9 +1,10 @@
-import { ActionFunction, LoaderFunction, useLoaderData } from 'remix';
+import { ActionFunction, LoaderFunction, useActionData, useLoaderData } from 'remix';
 import { get, submit } from '~/lib/http';
+import { isConstraintViolation, ValidationError, Violation } from '~/lib/validation';
 import AddTaskForm from '../components/add-task-form/add-task-form';
 import EmptyTaskList from '../components/task-list/empty-list-alert';
 import TaskList from '../components/task-list/task-list';
-import { Task } from '../lib/task';
+import { NewTask, Task } from '../lib/task';
 
 export const loader: LoaderFunction = async ({ }) => {
     return {
@@ -13,32 +14,45 @@ export const loader: LoaderFunction = async ({ }) => {
 
 export const action: ActionFunction = async ({ request }) => {
     const formData = await request.formData();
-    return await submit('/tasks', 'POST', {
-        description: formData.get('description'),
-        dueDate: formData.get('dueDate')
-    })
+
+    if (formData.get('_action') === 'addTask') {
+        const values = {
+            description: formData.get('description'),
+            dueDate: formData.get('dueDate')
+        };
+        try {
+            await submit('/tasks', 'POST', values);
+        } catch (error: any) {
+            if (isConstraintViolation(error)) {
+                return {
+                    values,
+                    violations: error.violations
+                }
+            }
+            throw error;
+        }
+        return {
+            values: null,
+            violations: null
+        }
+    }
+
+    if (formData.get('_action') === 'markAsCompleted') {
+        const completedTasks = formData.getAll('completedTasks[]');
+
+        return await submit('/tasks/completed', 'POST', {
+            completedTasks: completedTasks
+        })
+    }
+
+    throw new Response("Invalid action", {
+        status: 400
+    });
 }
 
 export default function Tasks() {
-    const handleCompleteTask = () => { };
-
     const { tasks } = useLoaderData<{ tasks: Task[] }>();
-
-    // const handleAddTask = async (newTask: NewTask) => {
-    //     try {
-    //         setTasks();
-    //     } catch (error) {
-    //         if (error.status === 422) {
-    //             throw new ValidationError(error.violations);
-    //         }
-    //     }
-    // };
-
-    // const handleCompleteTask = async (taskId: string) => setTasks(
-    //     await submit('/tasks/completed', 'POST', {
-    //         completedTasks: [taskId]
-    //     })
-    // );
+    const actionData = useActionData<{ values: NewTask | null, violations: Violation[] | null }>();
 
     return (
         <>
@@ -47,7 +61,10 @@ export default function Tasks() {
                     <EmptyTaskList text="All done!" /> :
                     <TaskList action="/?index" tasks={tasks} />
             }
-            <AddTaskForm action="/?index" />
+            <AddTaskForm
+                action="/?index"
+                values={actionData?.values ?? null}
+                validationError={actionData?.violations ? new ValidationError(actionData?.violations) : null} />
         </>
     );
 };

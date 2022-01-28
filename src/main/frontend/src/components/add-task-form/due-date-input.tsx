@@ -4,10 +4,10 @@ import { getInvalidFormControlCssClass, Violation } from '../../lib/validation';
 type DueDateInputProps = {
     value: string | null,
     violations: Violation[] | undefined,
-    onChange: (value: string | null) => void
+    onChange?: (value: string | null) => void
 };
 
-const DueDateInput: FunctionComponent<DueDateInputProps> = ({ value, onChange, violations }) => {
+const DueDateInput: FunctionComponent<DueDateInputProps> = ({ value, onChange = () => undefined, violations }) => {
     const handleInput = ({ currentTarget }: FormEvent<HTMLInputElement>) => currentTarget.setCustomValidity('');
     const handleInvalid = ({ currentTarget }: FormEvent<HTMLInputElement>) => currentTarget.setCustomValidity('Please pick a future date.');
 
@@ -22,7 +22,7 @@ const DueDateInput: FunctionComponent<DueDateInputProps> = ({ value, onChange, v
                 type="date"
                 id="addTask-dueDate"
                 name="dueDate"
-                value={(value === null) ? '' : value}
+                defaultValue={(value === null) ? '' : value}
                 className={`form-control due-date ${getInvalidFormControlCssClass(violations)}`}
                 min={today}
                 onInput={handleInput}
