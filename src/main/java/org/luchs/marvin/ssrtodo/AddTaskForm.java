@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 public class AddTaskForm {
 
-    @NotNull
+    @NotNull(message = "Please enter a task.")
     @Size(min = 1, message = "Please enter a task.")
     private final String description;
 
